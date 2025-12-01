@@ -1,0 +1,29 @@
+name: Python Tests Simples
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # El sistema operativo donde se ejecutará la prueba
+
+    steps:
+    - uses: actions/checkout@v4 # Paso 1: Descarga tu código
+    
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # Paso 2: Configura el entorno Python
+
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        # En este caso no hay dependencias externas, pero es buena práctica
+
+    - name: Ejecutar pruebas unitarias simples
+      run: |
+        # Este comando busca y ejecuta todos los archivos test_*.py
+        python -m unittest test_auth.py
